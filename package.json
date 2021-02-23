@@ -16,7 +16,8 @@
     "material-ui": "^0.19.4",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
-    "react-tap-event-plugin": "^3.0.3"
+    "react-tap-event-plugin": "^3.0.3",
+    "web-vitals": "^1.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
