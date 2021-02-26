@@ -1,50 +1,75 @@
-var names = ['Jeevan','India','Cognizant','Hyderabad','Asia','Earth','World'];
- 
-var len = names.length;
- 
-// initialize,test, increase
- 
-var i;
- 
-// for(i=0;i<len;i++){
-//     console.log(i+" " +names[i]);
-// }
- 
-// for(i=0;i<len;i++){
-//     if(i%2==0){
-//         console.log(i+" "+names[i]);
-//     }
-//     else{
-//         console.log(i);
-//     }
-// }
- 
-// for (i=len-1;i>=0;i--){
-//     console.log(i+" "+names[i]);
-// }
- 
-//** Objects for loop
- 
-var newobj = {"name":"Jeevan", "place":"Tirupati", "age": 23};
-console.log(newobj);
- 
-//there is no property length in objects
- 
-let j;
-for(j in newobj){
-    console.log(j);
-    console.log(newobj[j]);
-}
- 
-var newarrobj = ['maths','english',{"science":'physics','nature':'biology',"social":"history"}];
-let k;
-// for(k in newarrobj){
-//     console.log(k);
-//     console.log(k,newarrobj[k]);
-// }
-newarrobj.map((det,i)=>{
-    for (const [key, value] of Object.entries(det)) {
-        console.log(`${key}: ${value}`);
-       //return <div>{key}:{value}</div>
+const data= 
+    {
+        application: { //object
+          name: "website", //string
+          bootstrap: true, //boolean
+          rootComponent: { //object
+            name: "viewport", //string
+            bindings: { input: [], output: [] }, 
+            properties: [],
+            methods: [],
+            components: [],
+          },
+          bindings: { input: [], output: [] },
+        },
       }
-})
+ 
+
+var i=0
+function printValues(obj,y=1,x=[]) {
+    for (var key in obj) {
+        if(typeof obj[key] === "boolean"){
+            console.log('inisde boolean',obj[key])
+            x.push([...(new Array(y).fill("")),key,obj[key]]);
+        } 
+        else if(typeof obj[key] === "string"){
+            console.log('inisde string',obj[key])
+            x.push([...(new Array(y).fill("")),key,obj[key]]);
+        } 
+        
+        else if (typeof obj[key] === "object") {
+            
+           if(Array.isArray(obj[key])) { 
+            console.log('inisde array',obj[key])
+            x.push([...(new Array(y).fill("")),key,obj[key].map((val)=>{
+              return  printValues(val,y++,x)
+            })])
+           }else{
+            console.log('inisde object',key)
+             x.push([...(new Array(y).fill("")),key,'\{',printValues(obj[key],y++,x)]);
+            x.push([...(new Array(y).fill("")),'\}'])
+        }   
+        } 
+    }
+}
+const arr=[]
+printValues(data,1,arr);
+console.log(arr)
+
+// datamap(data);
+// function isObj(obj){
+//     let k;
+//     for(k in obj){
+//         // console.log(k);
+//         console.log(k+" : "+obj[k]);
+//         if(obj[k] instanceof Object){
+//            isObj(obj[k])
+//         }
+//     }
+// }
+// isObj(data);
+// function datamap(){
+//     data.map((det,i)=>{
+//     for (const [key, value] of Object.entries(det)) {
+//         if (typeof det[key] === "object") {
+//             datamap(value);   
+//         } else {
+//             console.log(`${key}: ${value}`);    
+//         }
+//         console.log(typeof det[key])
+        
+     
+     
+//     }
+//   })
+// }

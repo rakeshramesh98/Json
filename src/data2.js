@@ -12,4 +12,4 @@ const data = {
     bindings: { input: [], output: [] },
   },
 };
-console.log(data.application.name)
+console.log("data['application']['name']")
