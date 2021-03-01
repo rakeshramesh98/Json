@@ -27,10 +27,16 @@ code {
 .array{
   color: green;
 }
+.others{
+  color: blue;
+}
 .space {
   border-left: 0.5px dashed rgb(0, 0, 0);
   padding-right: 10px;
 }
 .objects{
   color: red;
+}
+.brackets{
+  color: black;
 }

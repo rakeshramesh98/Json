@@ -33,73 +33,77 @@ const x=getJsonIterable(data, 0, "", "data")
         else{
           value.pop()
         }
-        if(value.includes("{")){
+        if(value.includes("{")&&(value.length>2)||value.includes("}")){
           return(
             <div className="objects">
              {value.map((value2,i)=>{
                if(value2===""){
                 return <span className="space"></span>
               }
-              else if(value2==="{"||value2==="["){
-                return <span>:{value2}</span>
+              else if(value2==="{"){
+                return <span className="brackets">:{value2}</span>
               }
-              else if(value2==="}"||value2==="}"){
-               return <span>{value2}</span>
+              else if(value2==="}"){
+               return <span className="brackets">{value2}</span>
              }
              else
                 return <span>{value2}</span>
-               
-                   
               })}
             </div>
           )
         }
-        else if(value.includes("[")){
+        else if(value.includes("[")||value.includes("]")){
           return(
             <div className="array">
              {value.map((value2,i)=>{
                if(value2===""){
                 return <span className="space"></span>
               }
-              else if(value2==="{"||value2==="["){
-                return <span>:{value2}</span>
+              else if(value2==="["){
+                return <span className="brackets">:{value2}</span>
               }
-              else if(value2==="}"||value2==="}"){
-               return <span>{value2}</span>
+              
+              else if(value2==="]"){
+               return <span className="brackets">{value2}</span>
              }
              else
+                return <span>{value2}</span>   
+              })}
+            </div>
+          )
+        }
+        else if((value.length<=2)){
+          return(
+            <div>
+             {value.map((value2,i)=>{
+                if(value2==="{"||value2==="}"){
+                  return <span className="brackets">{value2}</span>
+                } 
+              })}
+            </div>
+          )
+        }
+        else{
+          value.splice(-1,0," : ")
+          return(
+            <div className="others">
+             {value.map((value2,i)=>{
+                if(value2===""){
+                  return <span className="space"></span>
+                }
+               else if(value2===true){
+                return <span>true</span>
+               }
+               else{
                 return <span>{value2}</span>
-               
+               }
                    
               })}
             </div>
           )
         }
 
-        return(
-          <div className="outer">
-           {value.map((value2,i)=>{
-              if(value2===""){
-                return <span className="space"></span>
-              }
-              else if(value2==="{"||value2==="["){
-                return <span>:{value2}</span>
-              }
-              else if(value2==="}"||value2==="}"){
-               return <span>{value2}</span>
-             }
-             else if(value2===true){
-              return <span>true</span>
-             }
-             
-             
-             else{
-              return <span>{value2}</span>
-             }
-                 
-            })}
-          </div>
-        )
+        
       })} 
     </div>
   )
