@@ -22,9 +22,15 @@ code {
 }
 .inner{
   display: inline;
-  color: red;
+
 }
-.empty-span {
+.array{
+  color: green;
+}
+.space {
   border-left: 0.5px dashed rgb(0, 0, 0);
   padding-right: 10px;
+}
+.objects{
+  color: red;
 }

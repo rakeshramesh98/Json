@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './App.css'
 import 'antd/dist/antd.css';
 import getJsonIterable from './utils.js'
 function App() {
+var [flag,setFlag]=useState("array")
   const data = {
     application: {
       //object
@@ -21,6 +22,7 @@ function App() {
   };
 const x=getJsonIterable(data, 0, "", "data")
 //console.log(x)
+
   return (
     <div className="main">
       {x.map((value)=>{
@@ -31,12 +33,12 @@ const x=getJsonIterable(data, 0, "", "data")
         else{
           value.pop()
         }
-        
-        return(
-          <div className="outer">
-           {value.map((value2,i)=>{
-              if(value2===""){
-                return <span className="empty-span"></span>
+        if(value.includes("{")){
+          return(
+            <div className="objects">
+             {value.map((value2,i)=>{
+               if(value2===""){
+                return <span className="space"></span>
               }
               else if(value2==="{"||value2==="["){
                 return <span>:{value2}</span>
@@ -44,7 +46,57 @@ const x=getJsonIterable(data, 0, "", "data")
               else if(value2==="}"||value2==="}"){
                return <span>{value2}</span>
              }
-                 return <li className="inner"><span className={`class${i}`}>{value2}</span></li>
+             else
+                return <span>{value2}</span>
+               
+                   
+              })}
+            </div>
+          )
+        }
+        else if(value.includes("[")){
+          return(
+            <div className="array">
+             {value.map((value2,i)=>{
+               if(value2===""){
+                return <span className="space"></span>
+              }
+              else if(value2==="{"||value2==="["){
+                return <span>:{value2}</span>
+              }
+              else if(value2==="}"||value2==="}"){
+               return <span>{value2}</span>
+             }
+             else
+                return <span>{value2}</span>
+               
+                   
+              })}
+            </div>
+          )
+        }
+
+        return(
+          <div className="outer">
+           {value.map((value2,i)=>{
+              if(value2===""){
+                return <span className="space"></span>
+              }
+              else if(value2==="{"||value2==="["){
+                return <span>:{value2}</span>
+              }
+              else if(value2==="}"||value2==="}"){
+               return <span>{value2}</span>
+             }
+             else if(value2===true){
+              return <span>true</span>
+             }
+             
+             
+             else{
+              return <span>{value2}</span>
+             }
+                 
             })}
           </div>
         )
