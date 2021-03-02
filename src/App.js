@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import './App.css'
 import 'antd/dist/antd.css';
+import {PlusCircleOutlined} from "@ant-design/icons"
 import getJsonIterable from './utils.js'
 function App() {
 var [flag,setFlag]=useState("array")
+var [click,setClick]=useState("clicked")
   const data = {
     application: {
       //object
@@ -22,6 +24,10 @@ var [flag,setFlag]=useState("array")
   };
 const x=getJsonIterable(data, 0, "", "data")
 //console.log(x)
+const handleClick=()=>{
+setClick("not")
+return <div>{click}</div>
+}
 
   return (
     <div className="main">
@@ -60,7 +66,7 @@ const x=getJsonIterable(data, 0, "", "data")
                 return <span className="space"></span>
               }
               else if(value2==="["){
-                return <span className="brackets">:{value2}</span>
+                return <span className="brackets">:{value2} <PlusCircleOutlined onClick={()=>handleClick}/></span>
               }
               
               else if(value2==="]"){
@@ -99,6 +105,7 @@ const x=getJsonIterable(data, 0, "", "data")
                }
                    
               })}
+              
             </div>
           )
         }
